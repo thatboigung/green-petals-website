@@ -174,8 +174,8 @@ export default function Home() {
               {/* Unsplash: Engineer working */}
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1581094794329-cd1361ddee25?q=80&w=2127&auto=format&fit=crop" 
-                  alt="Engineer working"
+                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop" 
+                  alt="Engineer working on solar panels"
                   className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
                 />
               </div>

@@ -29,9 +29,18 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey.join("/") as string, {
-      credentials: "include",
-    });
+    const rawUrl = queryKey.join("/") as string;
+    const isApi = rawUrl.startsWith("/api/");
+
+    // Map a few API endpoints to local mock JSON files in `public/mock`.
+    const apiToMock: Record<string, string> = {
+      "/api/products": "/mock/products.json",
+      "/api/testimonials": "/mock/testimonials.json",
+    };
+
+    const fetchUrl = isApi ? apiToMock[rawUrl] ?? rawUrl : rawUrl;
+
+    const res = await fetch(fetchUrl, isApi ? { credentials: "include" } : {});
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
       return null;

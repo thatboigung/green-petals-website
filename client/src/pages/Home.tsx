@@ -37,11 +37,13 @@ import {
 } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Navbar } from "@/components/Navbar";
+import { Link } from "wouter";
 import { Footer } from "@/components/Footer";
 import { ServiceCard } from "@/components/ServiceCard";
 import { insertInquirySchema, type InsertInquiry, type Product, type Testimonial } from "@shared/schema";
 import { useSubmitInquiry } from "@/hooks/use-contact";
 import { api } from "@shared/routes";
+import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 
 export default function Home() {
   const mutation = useSubmitInquiry();
@@ -49,18 +51,10 @@ export default function Home() {
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: [api.products.list.path],
-    queryFn: async () => {
-      const res = await fetch(api.products.list.path);
-      return res.json();
-    },
   });
 
   const { data: testimonials = [] } = useQuery<Testimonial[]>({
     queryKey: [api.testimonials.list.path],
-    queryFn: async () => {
-      const res = await fetch(api.testimonials.list.path);
-      return res.json();
-    },
   });
 
   const filteredProducts = selectedCategory === "all" 
@@ -283,9 +277,9 @@ export default function Home() {
             ))}
           </div>
 
-          {/* Products Grid */}
+          {/* Products Grid (show preview of 4 products) */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.map((product) => (
+            {filteredProducts.slice(0, 4).map((product) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -318,13 +312,21 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+
+          <div className="flex justify-center mt-8">
+            <Link href="/products">
+              <Button variant="outline" className="px-8">
+                View More Products
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
       {/* TESTIMONIALS SECTION */}
       <section id="testimonials" className="py-24 bg-muted/50">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
+          <div className="text-center max-w-2xl mx-auto mb-8">
             <span className="text-primary font-bold uppercase tracking-widest text-sm">Client Reviews</span>
             <h2 className="text-4xl font-bold mt-3 mb-4">What Our Clients Say</h2>
             <p className="text-muted-foreground text-lg">
@@ -332,43 +334,44 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, idx) => {
-              const initials = testimonial.author
-                .split(" ")
-                .map(n => n[0])
-                .join("")
-                .toUpperCase();
-              
-              return (
-                <motion.div
-                  key={testimonial.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                >
-                  <Card className="p-8 h-full flex flex-col">
-                    <div className="flex gap-1 mb-4">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                      ))}
-                    </div>
-                    <p className="text-muted-foreground mb-6 flex-grow text-lg leading-relaxed">"{testimonial.content}"</p>
-                    <div className="border-t pt-4 flex items-center gap-3">
-                      <Avatar className="w-10 h-10">
-                        <AvatarFallback className="bg-primary/20 text-primary font-bold">{initials}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="font-bold text-secondary">{testimonial.author}</p>
-                        {testimonial.position && <p className="text-sm text-muted-foreground">{testimonial.position}</p>}
-                      </div>
-                    </div>
-                  </Card>
-                </motion.div>
-              );
-            })}
-          </div>
+          <Carousel>
+            <CarouselContent className="items-stretch">
+              {testimonials.map((testimonial) => {
+                const initials = testimonial.author
+                  .split(" ")
+                  .map((n) => n[0])
+                  .join("")
+                  .toUpperCase();
+
+                return (
+                  <CarouselItem key={testimonial.id} className="md:basis-1/2 lg:basis-1/2">
+                    <motion.div initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                      <Card className="p-8 h-full flex flex-col">
+                        <div className="flex gap-1 mb-4">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                          ))}
+                        </div>
+                        <p className="text-muted-foreground mb-6 flex-grow text-lg leading-relaxed">"{testimonial.content}"</p>
+                        <div className="border-t pt-4 flex items-center gap-3">
+                          <Avatar className="w-10 h-10">
+                            <AvatarFallback className="bg-primary/20 text-primary font-bold">{initials}</AvatarFallback>
+                          </Avatar>
+                          <div>
+                            <p className="font-bold text-secondary">{testimonial.author}</p>
+                            {testimonial.position && <p className="text-sm text-muted-foreground">{testimonial.position}</p>}
+                          </div>
+                        </div>
+                      </Card>
+                    </motion.div>
+                  </CarouselItem>
+                );
+              })}
+            </CarouselContent>
+
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 

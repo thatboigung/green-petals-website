@@ -9,22 +9,17 @@ export function useSubmitInquiry() {
     mutationFn: async (data: InsertInquiry) => {
       // Validate input against schema before sending
       const validated = api.contact.submit.input.parse(data);
-      
-      const res = await fetch(api.contact.submit.path, {
-        method: api.contact.submit.method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(validated),
-      });
 
-      if (!res.ok) {
-        if (res.status === 400) {
-          const error = api.contact.submit.responses[400].parse(await res.json());
-          throw new Error(error.message);
-        }
-        throw new Error("Failed to submit inquiry");
-      }
+      // Frontend-only mode: persist inquiries to localStorage and return a simulated created record.
+      const STORAGE_KEY = "mock_inquiries";
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const current = raw ? JSON.parse(raw) as Array<any> : [];
+      const lastId = current.length ? Math.max(...current.map((i) => i.id || 0)) : 0;
+      const newInquiry = { id: lastId + 1, ...validated, createdAt: new Date().toISOString() };
+      current.push(newInquiry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
 
-      return api.contact.submit.responses[201].parse(await res.json());
+      return api.contact.submit.responses[201].parse(newInquiry);
     },
     onSuccess: () => {
       toast({

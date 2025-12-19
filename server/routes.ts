@@ -54,6 +54,20 @@ async function seedDatabase() {
         category: "electrical",
         imageUrl: "/images/surge-protector.jpg",
       },
+      {
+        name: "1080p CCTV Camera",
+        description: "HD security camera with night vision and motion detection",
+        price: 12000, // $120
+        category: "security",
+        imageUrl: "/images/cctv-camera.jpg",
+      },
+      {
+        name: "Electric Fence System",
+        description: "Complete electric fence kit with charger and insulators",
+        price: 35000, // $350
+        category: "security",
+        imageUrl: "/images/electric-fence.jpg",
+      },
     ]);
   }
 

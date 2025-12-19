@@ -17,6 +17,7 @@ import {
   ShoppingCart
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { 
   Form, 
   FormControl, 
@@ -270,14 +271,14 @@ export default function Home() {
 
           {/* Category Filters */}
           <div className="flex justify-center gap-3 mb-12 flex-wrap">
-            {["all", "solar_panel", "inverter", "electrical"].map((cat) => (
+            {["all", "solar_panel", "inverter", "electrical", "security"].map((cat) => (
               <Button
                 key={cat}
                 variant={selectedCategory === cat ? "default" : "outline"}
                 onClick={() => setSelectedCategory(cat)}
                 className={selectedCategory === cat ? "bg-primary hover:bg-primary/90" : ""}
               >
-                {cat === "all" ? "All Products" : cat === "solar_panel" ? "Solar Panels" : cat === "inverter" ? "Inverters" : "Electrical"}
+                {cat === "all" ? "All Products" : cat === "solar_panel" ? "Solar Panels" : cat === "inverter" ? "Inverters" : cat === "electrical" ? "Electrical" : "Security"}
               </Button>
             ))}
           </div>
@@ -292,8 +293,18 @@ export default function Home() {
                 viewport={{ once: true }}
               >
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
-                  <div className="bg-muted h-48 flex items-center justify-center">
-                    <ShoppingCart className="w-12 h-12 text-muted-foreground/50" />
+                  <div className="bg-gradient-to-br from-muted to-muted/50 h-48 flex items-center justify-center relative">
+                    {product.imageUrl ? (
+                      <img 
+                        src={product.imageUrl} 
+                        alt={product.name}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).style.display = "none";
+                        }}
+                      />
+                    ) : null}
+                    <ShoppingCart className="w-12 h-12 text-muted-foreground/50 absolute" />
                   </div>
                   <div className="p-6 flex flex-col flex-grow">
                     <h3 className="text-lg font-bold text-secondary mb-2">{product.name}</h3>
@@ -322,28 +333,41 @@ export default function Home() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, idx) => (
-              <motion.div
-                key={testimonial.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-              >
-                <Card className="p-8 h-full flex flex-col">
-                  <div className="flex gap-1 mb-4">
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="w-5 h-5 fill-primary text-primary" />
-                    ))}
-                  </div>
-                  <p className="text-muted-foreground mb-6 flex-grow text-lg leading-relaxed">"{testimonial.content}"</p>
-                  <div className="border-t pt-4">
-                    <p className="font-bold text-secondary">{testimonial.author}</p>
-                    {testimonial.position && <p className="text-sm text-muted-foreground">{testimonial.position}</p>}
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
+            {testimonials.map((testimonial, idx) => {
+              const initials = testimonial.author
+                .split(" ")
+                .map(n => n[0])
+                .join("")
+                .toUpperCase();
+              
+              return (
+                <motion.div
+                  key={testimonial.id}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: idx * 0.1 }}
+                >
+                  <Card className="p-8 h-full flex flex-col">
+                    <div className="flex gap-1 mb-4">
+                      {[...Array(testimonial.rating)].map((_, i) => (
+                        <Star key={i} className="w-5 h-5 fill-primary text-primary" />
+                      ))}
+                    </div>
+                    <p className="text-muted-foreground mb-6 flex-grow text-lg leading-relaxed">"{testimonial.content}"</p>
+                    <div className="border-t pt-4 flex items-center gap-3">
+                      <Avatar className="w-10 h-10">
+                        <AvatarFallback className="bg-primary/20 text-primary font-bold">{initials}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <p className="font-bold text-secondary">{testimonial.author}</p>
+                        {testimonial.position && <p className="text-sm text-muted-foreground">{testimonial.position}</p>}
+                      </div>
+                    </div>
+                  </Card>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>

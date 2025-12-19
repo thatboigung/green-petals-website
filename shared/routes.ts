@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { insertInquirySchema, inquiries } from './schema';
+import { insertInquirySchema, inquiries, products, testimonials } from './schema';
 
 export const errorSchemas = {
   validation: z.object({
@@ -20,6 +20,24 @@ export const api = {
       responses: {
         201: z.custom<typeof inquiries.$inferSelect>(),
         400: errorSchemas.validation,
+      },
+    },
+  },
+  products: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/products',
+      responses: {
+        200: z.array(z.custom<typeof products.$inferSelect>()),
+      },
+    },
+  },
+  testimonials: {
+    list: {
+      method: 'GET' as const,
+      path: '/api/testimonials',
+      responses: {
+        200: z.array(z.custom<typeof testimonials.$inferSelect>()),
       },
     },
   },

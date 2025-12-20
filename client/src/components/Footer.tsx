@@ -8,8 +8,14 @@ export function Footer() {
           {/* Brand */}
           <div className="col-span-1 md:col-span-1">
             <div className="flex items-center gap-2 mb-4">
-              <div className="bg-primary p-1.5 rounded-md">
-                <Leaf className="w-5 h-5 text-white" />
+              <div className="bg-primary rounded-md">
+                      <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
+  <img
+    src="./favi-icon.png"
+    alt=""
+    className="w-8 h-8 rounded-full" // adjust size and radius
+  />
+</div>
               </div>
               <span className="font-bold text-xl tracking-tight">Green Petals</span>
             </div>

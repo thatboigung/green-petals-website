@@ -14,7 +14,9 @@ import {
   Mail,
   MapPin,
   Star,
-  ShoppingCart
+  ShoppingCart,
+  Instagram,
+  Facebook
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -369,7 +371,11 @@ export default function Home() {
               })}
             </CarouselContent>
 
-           
+            {/* Arrows moved below the carousel and centered */}
+            <div className="flex items-center justify-center gap-4 mt-20">
+              <CarouselPrevious className="static h-10 w-10" />
+              <CarouselNext className="static h-10 w-10" />
+            </div>
           </Carousel>
         </div>
       </section>
@@ -418,7 +424,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Address</h4>
-                    <p className="text-muted-foreground">414 Acacia road, Manresa Park,Harare, Zimbabwe</p>
+                    <p className="text-muted-foreground">414 Acacia road, Manresa Park, Harare, Zimbabwe</p>
                   </div>
                 </div>
 
@@ -428,7 +434,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Phone</h4>
-                    <p className="text-muted-foreground"> +263 78 493 2948</p>
+                    <p className="text-muted-foreground">+263784932948</p>
                   </div>
                 </div>
 
@@ -439,6 +445,26 @@ export default function Home() {
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Email</h4>
                     <p className="text-muted-foreground">jshayamunda@yahoo.com</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
+                    <Instagram className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-secondary mb-1">Instagram</h4>
+                    <p className="text-muted-foreground"><a href="https://www.instagram.com/green_petals_engineering" target="_blank" rel="noreferrer" className="underline">green_petals_engineering</a></p>
+                  </div>
+                </div>
+
+                <div className="flex items-start gap-4">
+                  <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
+                    <Facebook className="w-6 h-6 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="font-bold text-secondary mb-1">Facebook</h4>
+                    <p className="text-muted-foreground"><a href="https://www.facebook.com/greenpetalsengineering" target="_blank" rel="noreferrer" className="underline">green petals engineering</a></p>
                   </div>
                 </div>
               </div>

@@ -279,7 +279,7 @@ export default function Home() {
 
           {/* Products Grid (show preview of 4 products) */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.slice(0, 4).map((product) => (
+            {filteredProducts.slice(0, 3).map((product) => (
               <motion.div
                 key={product.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -391,15 +391,16 @@ export default function Home() {
               viewport={{ once: true }}
               className="rounded-2xl overflow-hidden shadow-xl h-96"
             >
-              <iframe
-                width="100%"
-                height="100%"
-                frameBorder="0"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3024.2219901290354!2d-74.00601!3d40.71282!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a27e5ecc8f9%3A0xf81cef2b1eb66c94!2s123%20Industrial%20Ave%2C%20New%20York%2C%20NY%2010001!5e0!3m2!1sen!2sus!4v1234567890"
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              />
+           <iframe
+  width="100%"
+  height="100%"
+  frameBorder="0"
+  src="https://www.google.com/maps?q=414+Acacia+Road,+Manresa+Park,+Harare,+Zimbabwe&output=embed"
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
+
             </motion.div>
 
             {/* Location Info */}
@@ -418,8 +419,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Address</h4>
-                    <p className="text-muted-foreground">123 Industrial Ave, Tech District</p>
-                    <p className="text-muted-foreground">New York, NY 10001, USA</p>
+                    <p className="text-muted-foreground">414 Acacia road, Manresa Park,Harare, Zimbabwe</p>
                   </div>
                 </div>
 
@@ -429,8 +429,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Phone</h4>
-                    <p className="text-muted-foreground">+1 (555) 123-4567</p>
-                    <p className="text-muted-foreground">+1 (555) 987-6543</p>
+                    <p className="text-muted-foreground"> +263 78 493 2948</p>
                   </div>
                 </div>
 
@@ -440,8 +439,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Email</h4>
-                    <p className="text-muted-foreground">contact@greenpetals.com</p>
-                    <p className="text-muted-foreground">support@greenpetals.com</p>
+                    <p className="text-muted-foreground">jshayamunda@yahoo.com</p>
                   </div>
                 </div>
               </div>
@@ -480,8 +478,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg">Phone</h4>
-                        <p className="text-white/60">+1 (555) 123-4567</p>
-                        <p className="text-white/60">+1 (555) 987-6543</p>
+                        <p className="text-muted-foreground"> +263 78 493 2948</p>
                       </div>
                     </div>
                     
@@ -491,8 +488,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg">Email</h4>
-                        <p className="text-white/60">contact@greenpetals.com</p>
-                        <p className="text-white/60">support@greenpetals.com</p>
+                        <p className="text-white/60">jshayamunda@yahoo.com</p>
                       </div>
                     </div>
 
@@ -502,8 +498,7 @@ export default function Home() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg">Location</h4>
-                        <p className="text-white/60">123 Industrial Ave, Tech District</p>
-                        <p className="text-white/60">New York, NY 10001</p>
+                          <p className="text-muted-foreground">414 Acacia road, Manresa Park,Harare, Zimbabwe</p>
                       </div>
                     </div>
                   </div>
@@ -537,7 +532,7 @@ export default function Home() {
                           <FormItem>
                             <FormLabel>Phone Number</FormLabel>
                             <FormControl>
-                              <Input placeholder="+1 (555) 000-0000" className="h-12 bg-muted/30" {...field} />
+                              <Input placeholder="+263 00 000 0000" className="h-12 bg-muted/30" {...field} />
                             </FormControl>
                             <FormMessage />
                           </FormItem>

@@ -43,9 +43,14 @@ export function Navbar() {
           className="flex items-center gap-2 group cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
         >
-          <div className="bg-primary text-white p-2 rounded-lg group-hover:bg-primary/90 transition-colors">
-            <Leaf className="w-5 h-5" />
-          </div>
+         <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
+  <img
+    src="./favi-icon.png"
+    alt=""
+    className="w-8 h-8 rounded-full" // adjust size and radius
+  />
+</div>
+
           <div className="flex flex-col leading-none">
             <span className={`font-bold text-lg tracking-tight ${isScrolled ? 'text-secondary' : 'text-secondary md:text-white'}`}>
               Green Petals

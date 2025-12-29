@@ -1,56 +1,17 @@
-import { z } from 'zod';
-import { insertInquirySchema, inquiries, products, testimonials } from './schema';
 
-export const errorSchemas = {
-  validation: z.object({
-    message: z.string(),
-    field: z.string().optional(),
-  }),
-  internal: z.object({
-    message: z.string(),
-  }),
-};
+import { z } from 'zod';
+import { insertContactSchema, contactMessageSchema } from './schema';
 
 export const api = {
   contact: {
     submit: {
       method: 'POST' as const,
       path: '/api/contact',
-      input: insertInquirySchema,
+      input: insertContactSchema,
       responses: {
-        201: z.custom<typeof inquiries.$inferSelect>(),
-        400: errorSchemas.validation,
-      },
-    },
-  },
-  products: {
-    list: {
-      method: 'GET' as const,
-      path: '/api/products',
-      responses: {
-        200: z.array(z.custom<typeof products.$inferSelect>()),
-      },
-    },
-  },
-  testimonials: {
-    list: {
-      method: 'GET' as const,
-      path: '/api/testimonials',
-      responses: {
-        200: z.array(z.custom<typeof testimonials.$inferSelect>()),
+        201: contactMessageSchema,
+        400: z.object({ message: z.string() }),
       },
     },
   },
 };
-
-export function buildUrl(path: string, params?: Record<string, string | number>): string {
-  let url = path;
-  if (params) {
-    Object.entries(params).forEach(([key, value]) => {
-      if (url.includes(`:${key}`)) {
-        url = url.replace(`:${key}`, String(value));
-      }
-    });
-  }
-  return url;
-}

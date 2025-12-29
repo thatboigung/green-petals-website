@@ -1,75 +1,67 @@
-import { Leaf, Mail, MapPin, Phone } from "lucide-react";
+import { Link } from "wouter";
+import { FaWhatsapp, FaInstagram, FaFacebook } from "react-icons/fa";
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-white pt-16 pb-8">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          {/* Brand */}
-          <div className="col-span-1 md:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-primary rounded-md">
-                      <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
-  <img
-    src="./favi-icon.png"
-    alt=""
-    className="w-8 h-8 rounded-full" // adjust size and radius
-  />
-</div>
-              </div>
-              <span className="font-bold text-xl tracking-tight">Green Petals</span>
-            </div>
-            <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Exceptional engineering solutions for homes and industries. Powering your future, securing your present.
+    <footer className="bg-zinc-950 pt-20 pb-10 border-t border-white/5">
+      <div className="container mx-auto px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+          <div className="space-y-4">
+            <Link href="/" className="text-2xl font-display font-bold tracking-tighter">
+              <span className="text-white">GFG</span>
+              <span className="text-primary">STUDIOS</span>
+            </Link>
+            <p className="text-white/60 text-sm leading-relaxed">
+              Unleashing creativity and elevating brands through premium digital solutions.
+              We bridge the gap between vision and reality.
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
-            <h4 className="font-bold mb-4 text-white">Services</h4>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>Solar Systems</li>
-              <li>Electrical Maintenance</li>
-              <li>Security Installations</li>
-              <li>General Plumbing & Works</li>
+            <h4 className="font-display font-bold text-white mb-6">Services</h4>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li className="hover:text-primary transition-colors cursor-pointer">Branding & Identity</li>
+              <li className="hover:text-primary transition-colors cursor-pointer">Digital Marketing</li>
+              <li className="hover:text-primary transition-colors cursor-pointer">Web Development</li>
+              <li className="hover:text-primary transition-colors cursor-pointer">Photography & Video</li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-bold mb-4 text-white">Company</h4>
-            <ul className="space-y-2 text-sm text-white/70">
-              <li>About Us</li>
-              <li>Projects</li>
-              <li>Careers</li>
-              <li>Contact</li>
+            <h4 className="font-display font-bold text-white mb-6">Company</h4>
+            <ul className="space-y-3 text-sm text-white/60">
+              <li className="hover:text-primary transition-colors cursor-pointer"><Link href="/about">About Us</Link></li>
+              <li className="hover:text-primary transition-colors cursor-pointer"><Link href="/pricing">Pricing</Link></li>
+              <li className="hover:text-primary transition-colors cursor-pointer"><Link href="/contact">Contact</Link></li>
+              <li className="hover:text-primary transition-colors cursor-pointer">Careers</li>
             </ul>
           </div>
 
-          {/* Contact */}
           <div>
-            <h4 className="font-bold mb-4 text-white">Contact Us</h4>
-            <ul className="space-y-3 text-sm text-white/70">
-              <li className="flex items-start gap-3">
-                <MapPin className="w-4 h-4 mt-0.5 text-primary" />
-                <span>123 Industrial Ave,<br/>Engineering District</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-primary" />
-                <span>+263 78 493 2948</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail className="w-4 h-4 text-primary" />
-                <span>jshayamunda@yahoo.com</span>
-              </li>
-            </ul>
+            <h4 className="font-display font-bold text-white mb-6">Connect</h4>
+            <div className="flex space-x-4 mb-6">
+              <a href="https://wa.me/+263788513666" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+                <FaWhatsapp size={18} />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+                <FaInstagram size={18} />
+              </a>
+              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center text-white hover:bg-primary hover:text-black transition-all">
+                <FaFacebook size={18} />
+              </a>
+            </div>
+            <p className="text-sm text-white/60">
+              Harare, Zimbabwe<br />
+              info@gfgstudios.com
+            </p>
           </div>
         </div>
 
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
-          <p>&copy; {new Date().getFullYear()} Green Petals Engineering. All rights reserved.</p>
-          <div className="flex gap-6">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center text-xs text-white/40">
+          <p>&copy; {new Date().getFullYear()} GFG Studios. All rights reserved.</p>
+          <div className="flex space-x-6 mt-4 md:mt-0">
+            <span className="hover:text-white transition-colors cursor-pointer">Privacy Policy</span>
+            <span className="hover:text-white transition-colors cursor-pointer">Terms of Service</span>
           </div>
         </div>
       </div>

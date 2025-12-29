@@ -1,10 +1,7 @@
 ## Packages
-framer-motion | For smooth scroll animations and entrance effects
-react-scroll | For smooth scrolling to sections
+framer-motion | Complex animations for hero section and scroll reveals
+react-icons | Social media icons (FaWhatsapp, FaInstagram, FaFacebook)
 
 ## Notes
-Tailwind Config - extend fontFamily:
-fontFamily: {
-  display: ["var(--font-display)"],
-  body: ["var(--font-body)"],
-}
+Tailwind Config: Extended colors for neon orange (#FFA500) and gold accents.
+Fonts: Montserrat (headings) and Inter (body).

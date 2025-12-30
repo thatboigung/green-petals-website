@@ -112,7 +112,7 @@ export default function Home() {
             transition={{ delay: 1, duration: 0.8 }}
             className="text-2xl md:text-5xl font-display font-bold text-white mb-6 tracking-tight"
           >
-           Unleash Creativity <span className="text-primary"> & Elevate Your Brand</span>
+          Built for Scale <span className="text-primary"> Designed for Dominance</span>
           </motion.h1>
 
           <motion.p

@@ -1,34 +1,37 @@
 import { useMutation } from "@tanstack/react-query";
-import { api } from "@shared/routes";
-import type { InsertContactMessage } from "@shared/schema";
+import { api, type InsertInquiry } from "@shared/routes";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
 
-export function useContact() {
+export function useSubmitInquiry() {
   const { toast } = useToast();
 
   return useMutation({
-    mutationFn: async (data: InsertContactMessage) => {
-      const res = await apiRequest(api.contact.submit.method, api.contact.submit.path, data);
+    mutationFn: async (data: InsertInquiry) => {
+      // Validate input against schema before sending
+      const validated = api.contact.submit.input.parse(data);
 
-      if (!res.ok) {
-        const error = await res.json();
-        throw new Error(error.message || "Failed to send message");
-      }
+      // Frontend-only mode: persist inquiries to localStorage and return a simulated created record.
+      const STORAGE_KEY = "mock_inquiries";
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const current = raw ? JSON.parse(raw) as Array<any> : [];
+      const lastId = current.length ? Math.max(...current.map((i) => i.id || 0)) : 0;
+      const newInquiry = { id: lastId + 1, ...validated, createdAt: new Date().toISOString() };
+      current.push(newInquiry);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(current));
 
-      return api.contact.submit.responses[201].parse(await res.json());
+      return api.contact.submit.responses[201].parse(newInquiry);
     },
     onSuccess: () => {
       toast({
-        title: "Message Sent!",
-        description: "We'll get back to you shortly.",
-        variant: "default",
+        title: "Inquiry Sent Successfully",
+        description: "Thank you for contacting Green Petals Engineering. We will get back to you shortly.",
+        className: "bg-primary text-primary-foreground border-none",
       });
     },
-    onError: (error: Error) => {
+    onError: (error) => {
       toast({
-        title: "Error",
-        description: error.message,
+        title: "Submission Failed",
+        description: error.message || "Please check your connection and try again.",
         variant: "destructive",
       });
     },

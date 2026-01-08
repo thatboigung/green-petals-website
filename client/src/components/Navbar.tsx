@@ -1,133 +1,117 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
-import { Menu, X, Sun, Moon } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ThemeContext } from "./ThemeProvider";
+import { Menu, X, Leaf } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function Navbar() {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [location] = useLocation();
-  const themeContext = useContext(ThemeContext);
-  const { theme, toggleTheme } = themeContext || { theme: "dark", toggleTheme: () => {} };
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 20);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = [
-    { name: "Home", href: "/" },
-    { name: "Services", href: "/#services" },
-    { name: "Founder", href: "/portfolio" },
-    { name: "Blogs", href: "/blogs" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "About", href: "/about" },
-    { name: "Contact", href: "/contact" },
-  ];
-
-  const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    // Handle anchor links manually if on same page
-    if (href.startsWith("/#")) {
-      const id = href.replace("/#", "");
-      const element = document.getElementById(id);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      } else if (location !== "/") {
-        // If not on home page, navigate to home then scroll (handled by useEffect in Home)
-        window.location.href = href;
-      }
+  const scrollToSection = (id: string) => {
+    setIsMobileOpen(false);
+    if (location !== "/") {
+      setLocation("/");
+      setTimeout(() => {
+        document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+      }, 100);
+    } else {
+      document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
     }
   };
 
   return (
-    <header
+    <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? "bg-background/80 dark:bg-black/80 backdrop-blur-md border-b border-foreground/10 dark:border-white/5 py-4" 
-          : "bg-transparent py-6"
+        isScrolled
+          ? "bg-white/90 backdrop-blur-md shadow-md py-3 border-b border-border/50"
+          : "bg-transparent py-5"
       }`}
     >
-      <div className="container mx-auto px-6 flex items-center justify-between">
-        <Link href="/" className="text-2xl font-display font-bold tracking-tighter hover:opacity-80 transition-opacity">
-          <span className="text-foreground">GFG</span>
-          <span className="text-primary">STUDIOS</span>
+      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
+        {/* Logo */}
+        <Link 
+          href="/" 
+          className="flex items-center gap-2 group cursor-pointer"
+          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        >
+         <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
+  <img
+    src="./favi-icon.png"
+    alt=""
+    className="w-8 h-8 rounded-full" // adjust size and radius
+  />
+</div>
+
+          <div className="flex flex-col leading-none">
+            <span className={`font-bold text-lg tracking-tight ${isScrolled ? 'text-secondary' : 'text-secondary md:text-white'}`}>
+              Green Petals
+            </span>
+            <span className={`text-xs font-medium tracking-widest uppercase ${isScrolled ? 'text-primary' : 'text-primary md:text-white/80'}`}>
+              Engineering
+            </span>
+          </div>
         </Link>
 
-        {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center space-x-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.href}
-              className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors uppercase tracking-wider"
-              onClick={() => handleNavClick(link.href)}
+        {/* Desktop Links */}
+        <div className="hidden md:flex items-center gap-8">
+          {[
+            { label: "Services", id: "services" },
+            { label: "About", id: "about" },
+            { label: "Contact", id: "contact" },
+          ].map((item) => (
+            <button
+              key={item.id}
+              onClick={() => scrollToSection(item.id)}
+              className={`text-sm font-medium transition-colors hover:text-primary ${
+                isScrolled ? "text-secondary" : "text-white/90"
+              }`}
             >
-              {link.name}
-            </Link>
-          ))}
-          <button
-            onClick={toggleTheme}
-            className="p-2 text-foreground/80 hover:text-primary transition-colors rounded-lg hover:bg-background/50"
-            aria-label="Toggle theme"
-            data-testid="button-toggle-theme"
-          >
-            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
-          <Link href="/contact">
-            <button className="px-5 py-2 rounded-full bg-primary text-black font-bold text-sm hover:bg-white transition-colors">
-              Get Started
+              {item.label}
             </button>
-          </Link>
-        </nav>
-
-        {/* Mobile Controls */}
-        <div className="md:hidden flex items-center gap-2">
-          <button
-            onClick={toggleTheme}
-            className="p-2 text-foreground hover:text-primary transition-colors rounded-lg hover:bg-background/50"
-            aria-label="Toggle theme"
-            data-testid="button-toggle-theme-mobile"
+          ))}
+          <Button 
+            onClick={() => scrollToSection("contact")}
+            className={isScrolled ? "" : "bg-white text-primary hover:bg-white/90 hover:text-primary"}
           >
-            {theme === "light" ? <Moon size={20} /> : <Sun size={20} />}
-          </button>
-          <button
-            className="text-foreground hover:text-primary transition-colors"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+            Get a Quote
+          </Button>
         </div>
+
+        {/* Mobile Toggle */}
+        <button
+          className="md:hidden p-2 text-secondary"
+          onClick={() => setIsMobileOpen(!isMobileOpen)}
+        >
+          {isMobileOpen ? <X /> : <Menu className={isScrolled ? "" : "text-white"} />}
+        </button>
       </div>
 
       {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-card dark:bg-zinc-950 border-b border-foreground/10 dark:border-white/5 overflow-hidden"
-          >
-            <nav className="flex flex-col p-6 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  className="text-lg font-medium text-foreground/80 hover:text-primary transition-colors"
-                  onClick={() => handleNavClick(link.href)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+      {isMobileOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl p-4 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5">
+          {["Services", "About", "Contact"].map((label) => (
+            <button
+              key={label}
+              onClick={() => scrollToSection(label.toLowerCase())}
+              className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary"
+            >
+              {label}
+            </button>
+          ))}
+          <Button onClick={() => scrollToSection("contact")} className="w-full">
+            Get a Quote
+          </Button>
+        </div>
+      )}
+    </nav>
   );
 }

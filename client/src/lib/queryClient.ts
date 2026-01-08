@@ -1,5 +1,4 @@
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
-import { handleApiRequest } from "./mockApi";
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -13,13 +12,6 @@ export async function apiRequest(
   url: string,
   data?: unknown | undefined,
 ): Promise<Response> {
-  // If this is an in-browser API route, use the mock handler
-  if (typeof window !== "undefined" && url.startsWith("/api")) {
-    const res = await handleApiRequest(method, url, data);
-    await throwIfResNotOk(res);
-    return res;
-  }
-
   const res = await fetch(url, {
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
@@ -37,17 +29,18 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const url = queryKey.join("/") as string;
+    const rawUrl = queryKey.join("/") as string;
+    const isApi = rawUrl.startsWith("/api/");
 
-    let res: Response;
-    if (typeof window !== "undefined" && url.startsWith("/api")) {
-      // Use the in-browser mock handler for local API routes
-      res = await handleApiRequest("GET", url);
-    } else {
-      res = await fetch(url, {
-        credentials: "include",
-      });
-    }
+    // Map a few API endpoints to local mock JSON files in `public/mock`.
+    const apiToMock: Record<string, string> = {
+      "/api/products": "/mock/products.json",
+      "/api/testimonials": "/mock/testimonials.json",
+    };
+
+    const fetchUrl = isApi ? apiToMock[rawUrl] ?? rawUrl : rawUrl;
+
+    const res = await fetch(fetchUrl, isApi ? { credentials: "include" } : {});
 
     if (unauthorizedBehavior === "returnNull" && res.status === 401) {
       return null;

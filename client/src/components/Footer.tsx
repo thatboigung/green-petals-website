@@ -53,9 +53,17 @@ export function Footer() {
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
                 <span>123 Industrial Ave,<br/>Engineering District</span>
               </li>
-              <li className="flex items-center gap-3">
-                <Phone className="w-4 h-4 text-primary" />
-                <span>+263 78 493 2948</span>
+              <li className="space-y-1">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-4 h-4 text-primary" />
+                  <span className="font-medium">Phone</span>
+                </div>
+                <div className="pl-7 text-sm space-y-1 text-white/70">
+                  <div><a href="tel:+263784932948" className="hover:underline">+263 78 493 2948</a></div>
+                  <div><a href="tel:+263242437342" className="hover:underline">+263 242 437342</a></div>
+                  <div><a href="tel:+263787535759" className="hover:underline">+263 787 535759</a></div>
+                  <div><a href="tel:+263719335497" className="hover:underline">+263 719 335497</a></div>
+                </div>
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary" />

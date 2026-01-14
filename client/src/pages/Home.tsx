@@ -433,9 +433,7 @@ function Home() {
 
     </div>
 
-  </div>
-
-  {/* Core Values — horizontal marquee */}
+ {/* Core Values — horizontal marquee */}
           <div className="bg-white rounded-2xl p-6 shadow-md">
             <h3 className="text-lg font-semibold mb-4">Core Values</h3>
 
@@ -477,6 +475,9 @@ function Home() {
             }
           `}</style>
           </div>
+  </div>
+
+ 
 </section>
 
       {/* SERVICES SECTION */}

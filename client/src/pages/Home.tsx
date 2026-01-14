@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
@@ -16,7 +16,8 @@ import {
   Star,
   ShoppingCart,
   Instagram,
-  Facebook
+  Facebook,
+  X
 } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
@@ -50,6 +51,17 @@ import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext
 export default function Home() {
   const mutation = useSubmitInquiry();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+  const [activeImage, setActiveImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!lightboxOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setLightboxOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [lightboxOpen]);
 
   const { data: products = [] } = useQuery<Product[]>({
     queryKey: [api.products.list.path],
@@ -58,6 +70,27 @@ export default function Home() {
   const { data: testimonials = [] } = useQuery<Testimonial[]>({
     queryKey: [api.testimonials.list.path],
   });
+
+  // Map testimonials to provided names and link to project images
+  type TestimonialWithProject = Testimonial & { project?: string };
+  const testimonialNames = ["Mr Banda", "Mr Mapfumo", "Mama Mai Chichi", "Mai Beauty", "Mr Zimunya"];
+  const testimonialProjects = ["Prjct2.jpeg", "Prjct5.jpeg", "Prjct1.jpeg", "Prjct4.jpeg", "Prjct8.jpeg"];
+
+  const enhancedTestimonials = (testimonials && testimonials.length
+    ? (testimonials as TestimonialWithProject[]).slice(0, 5).map((t, i) => ({
+        ...t,
+        author: testimonialNames[i] ?? t.author,
+        project: testimonialProjects[i],
+      }))
+    : testimonialNames.map((name, i) => ({
+        id: i + 100,
+        createdAt: null,
+        author: name,
+        position: null,
+        content: "Excellent workmanship and timely delivery.",
+        rating: 5,
+        project: testimonialProjects[i],
+      }))) as TestimonialWithProject[];
 
   const filteredProducts = selectedCategory === "all" 
     ? products 
@@ -255,6 +288,74 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PROJECTS SECTION */}
+      <section id="projects" className="py-24 bg-white">
+        <div className="container mx-auto px-4 md:px-6">
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm">Projects</span>
+            <h2 className="text-4xl font-bold mt-3 mb-4">Recent Works Across Harare</h2>
+            <p className="text-muted-foreground text-lg">
+              A selection of our installations and repairs — solar installations, gate motor systems, electrical fence installation, solar flood lights, solar pumps, telecoms and general repairs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { src: "Prjct1.jpeg", caption: "Mandara — Electric fence installation" },
+              { src: "Prjct2.jpeg", caption: "Manresa Park — Project" },
+              { src: "Prjct3.jpeg", caption: "Manresa Park — Project" },
+              { src: "Prjct4.jpeg", caption: "Dema — Solar-powered floodlights" },
+              { src: "Prjct5.jpeg", caption: "Sally Mugabe Heights — Solar installation" },
+              { src: "Prjct6.jpeg", caption: "Sally Mugabe Heights — Project" },
+              { src: "Prjct7.jpeg", caption: "Manresa Park — Repairs" },
+              { src: "Prjct8.jpeg", caption: "Harare — Electrical repairs" },
+            ].map((p, i) => (
+              <motion.div key={p.src} initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+                <div
+                  className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow cursor-pointer group"
+                  onClick={() => { setActiveImage(`/projects/${p.src}`); setLightboxOpen(true); }}
+                >
+                  <img
+                    src={`/projects/${p.src}`}
+                    alt={p.caption}
+                    className="w-full h-56 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                    role="button"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-4">
+                    <p className="text-white font-semibold text-sm">{p.caption}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+
+          <div className="mt-8 space-y-6">
+            <p className="text-center text-muted-foreground">And many more projects — view our work on social media:</p>
+
+            <div className="flex items-center justify-center gap-4">
+              <a href="https://www.instagram.com/green_petals_engineering?igsh=MzRpamQ5a242N2Ns" target="_blank" rel="noreferrer" aria-label="Instagram" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition">
+                <Instagram className="w-6 h-6 text-pink-500" />
+              </a>
+
+              <a href="https://www.facebook.com/share/1GfdkWzPAq/" target="_blank" rel="noreferrer" aria-label="Facebook" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition">
+                <Facebook className="w-6 h-6 text-blue-500" />
+              </a>
+
+              <a href="https://www.tiktok.com/@green.petals.engi?_t=ZM-8wNAdYON6JC&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition">
+                {/* Inline TikTok SVG */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current text-black" aria-hidden="true">
+                  <path d="M16.5 3h2.2V8.1c-.5.2-1 .3-1.5.3-.7 0-1.4-.2-1.9-.5v5.8c0 2.3-1.9 4.2-4.2 4.2-2.3 0-4.2-1.9-4.2-4.2s1.9-4.2 4.2-4.2c.2 0 .5 0 .7.1V7.7c-.3-.1-.7-.2-1.1-.2-2.1 0-3.8 1.7-3.8 3.8s1.7 3.8 3.8 3.8 3.8-1.7 3.8-3.8V4.5h-1.2V3z" />
+                </svg>
+              </a>
+            </div>
+
+            <div className="flex justify-center">
+              <Button variant="outline" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>Request a Quote</Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* STORE SECTION */}
       <section id="store" className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
@@ -339,7 +440,7 @@ export default function Home() {
 
           <Carousel>
             <CarouselContent className="items-stretch">
-              {testimonials.map((testimonial) => {
+              {enhancedTestimonials.map((testimonial) => {
                 const initials = testimonial.author
                   .split(" ")
                   .map((n) => n[0])
@@ -363,6 +464,19 @@ export default function Home() {
                           <div>
                             <p className="font-bold text-secondary">{testimonial.author}</p>
                             {testimonial.position && <p className="text-sm text-muted-foreground">{testimonial.position}</p>}
+                            {testimonial.project && (
+                              <p className="mt-1 text-sm">
+                                <button
+                                  className="text-primary underline"
+                                  onClick={() => {
+                                    setActiveImage(`/projects/${testimonial.project}`);
+                                    setLightboxOpen(true);
+                                  }}
+                                >
+                                  View project
+                                </button>
+                              </p>
+                            )}
                           </div>
                         </div>
                       </Card>
@@ -638,6 +752,19 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {lightboxOpen && (
+        <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4" onClick={() => setLightboxOpen(false)}>
+          <button
+            className="absolute top-6 right-6 bg-white/20 hover:bg-white/30 text-white p-2 rounded-full z-10"
+            onClick={(e) => { e.stopPropagation(); setLightboxOpen(false); }}
+            aria-label="Close image preview"
+          >
+            <X className="w-5 h-5" />
+          </button>
+          <img src={activeImage ?? ""} alt="Preview" className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg" onClick={(e) => e.stopPropagation()} />
+        </div>
+      )}
 
       <Footer />
     </div>

@@ -48,7 +48,7 @@ import { useSubmitInquiry } from "@/hooks/use-contact";
 import { api } from "@shared/routes";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 
-export default function Home() {
+function Home() {
   const mutation = useSubmitInquiry();
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
@@ -95,6 +95,30 @@ export default function Home() {
   const filteredProducts = selectedCategory === "all" 
     ? products 
     : products.filter(p => p.category === selectedCategory);
+
+  const suppliers = [
+    { name: "Sako", logo: "/logos/sako.webp" },
+    { name: "Gainstar", logo: "/logos/gainstar.svg" },
+    { name: "Must", logo: "/logos/must.jpg" },
+    { name: "Hz", logo: "/logos/hzsolar.svg" },
+    { name: "Srne", logo: "/logos/srne.webp" },
+    { name: "Deye", logo: "/logos/deye.jpg" },
+    { name: "Sumry", logo: "/logos/sumry.webp" },
+    { name: "Polaris", logo: "/logos/polaris.svg" },
+    { name: "Sunsynk", logo: "/logos/sunsynk.avif" },
+    { name: "JA", logo: "/logos/ja-solar.png" },
+    { name: "Jinko", logo: "/logos/jinko.png" },
+    { name: "Canadian", logo: "/logos/canadian-solar.png" },
+    { name: "Sunpro", logo: "/logos/sunpro.jpg" },
+  ];
+
+  // Provide a guaranteed fallback as an inline SVG data URL so logos always render even if external sources fail
+  const logoFallback = (name: string) => {
+    const bg = "#f8fafc"; // light neutral background
+    const color = "#111827"; // dark text
+    const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='160'><rect width='100%' height='100%' fill='${bg}'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-family='Inter, Arial, sans-serif' font-size='28' fill='${color}'>${name}</text></svg>`;
+    return `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
+  };
 
   const form = useForm<InsertInquiry>({
     resolver: zodResolver(insertInquirySchema),
@@ -333,17 +357,17 @@ export default function Home() {
             <p className="text-center text-muted-foreground">And many more projects — view our work on social media:</p>
 
             <div className="flex items-center justify-center gap-4">
-              <a href="https://www.instagram.com/green_petals_engineering?igsh=MzRpamQ5a242N2Ns" target="_blank" rel="noreferrer" aria-label="Instagram" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition">
-                <Instagram className="w-6 h-6 text-pink-500" />
+              <a href="https://www.instagram.com/green_petals_engineering?igsh=MzRpamQ5a242N2Ns" target="_blank" rel="noreferrer" aria-label="Instagram" className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 hover:bg-white/10 transition-transform transform hover:scale-105 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <Instagram className="w-5 h-5 text-primary" />
               </a>
 
-              <a href="https://www.facebook.com/share/1GfdkWzPAq/" target="_blank" rel="noreferrer" aria-label="Facebook" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition">
-                <Facebook className="w-6 h-6 text-blue-500" />
+              <a href="https://www.facebook.com/share/1GfdkWzPAq/" target="_blank" rel="noreferrer" aria-label="Facebook" className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 hover:bg-white/10 transition-transform transform hover:scale-105 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary">
+                <Facebook className="w-5 h-5 text-primary" />
               </a>
 
-              <a href="https://www.tiktok.com/@green.petals.engi?_t=ZM-8wNAdYON6JC&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok" className="p-2 rounded-full bg-white/5 hover:bg-white/10 transition">
+              <a href="https://www.tiktok.com/@green.petals.engi?_t=ZM-8wNAdYON6JC&_r=1" target="_blank" rel="noreferrer" aria-label="TikTok" className="inline-flex items-center justify-center h-11 w-11 rounded-full bg-white/5 hover:bg-white/10 transition-transform transform hover:scale-105 shadow-sm focus:outline-none focus:ring-2 focus:ring-primary">
                 {/* Inline TikTok SVG */}
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-6 h-6 fill-current text-black" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" className="w-5 h-5 fill-current text-primary" aria-hidden="true">
                   <path d="M16.5 3h2.2V8.1c-.5.2-1 .3-1.5.3-.7 0-1.4-.2-1.9-.5v5.8c0 2.3-1.9 4.2-4.2 4.2-2.3 0-4.2-1.9-4.2-4.2s1.9-4.2 4.2-4.2c.2 0 .5 0 .7.1V7.7c-.3-.1-.7-.2-1.1-.2-2.1 0-3.8 1.7-3.8 3.8s1.7 3.8 3.8 3.8 3.8-1.7 3.8-3.8V4.5h-1.2V3z" />
                 </svg>
               </a>
@@ -356,73 +380,78 @@ export default function Home() {
         </div>
       </section>
 
-      {/* STORE SECTION */}
+      {/* STORE SECTION - FIXED */}
       <section id="store" className="py-24 bg-white">
         <div className="container mx-auto px-4 md:px-6">
-          <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-primary font-bold uppercase tracking-widest text-sm">Product Store</span>
-            <h2 className="text-4xl font-bold mt-3 mb-4">Premium Equipment & Supplies</h2>
+          <div className="text-center max-w-2xl mx-auto mb-12">
+            <span className="text-primary font-bold uppercase tracking-widest text-sm">Main Suppliers</span>
+            <h2 className="text-4xl font-bold mt-3 mb-4">Trusted Brands We Supply</h2>
             <p className="text-muted-foreground text-lg">
-              Browse our selection of high-quality solar panels, inverters, and electrical equipment.
+              Green Petals Engineering supplies high-quality solar panels, inverters, batteries and system accessories from leading manufacturers — backed by professional installation and after-sales support.
             </p>
           </div>
 
-          {/* Category Filters */}
-          <div className="flex justify-center gap-3 mb-12 flex-wrap">
-            {["all", "solar_panel", "inverter", "electrical", "security"].map((cat) => (
-              <Button
-                key={cat}
-                variant={selectedCategory === cat ? "default" : "outline"}
-                onClick={() => setSelectedCategory(cat)}
-                className={selectedCategory === cat ? "bg-primary hover:bg-primary/90" : ""}
-              >
-                {cat === "all" ? "All Products" : cat === "solar_panel" ? "Solar Panels" : cat === "inverter" ? "Inverters" : cat === "electrical" ? "Electrical" : "Security"}
-              </Button>
-            ))}
+        
+
+          {/* Marquee Animation - Optional but fixed */}
+          <div className="mt-12">
+            <p className="text-center text-muted-foreground mb-6">Featured Partners</p>
+            <div className="relative overflow-hidden py-6">
+              <style>{`
+                @keyframes scroll {
+                  0% {
+                    transform: translateX(0);
+                  }
+                  100% {
+                    transform: translateX(-50%);
+                  }
+                }
+                .animate-scroll {
+                  animation: scroll 30s linear infinite;
+                }
+                .animate-scroll:hover {
+                  animation-play-state: paused;
+                }
+              `}</style>
+              
+              <div className="flex animate-scroll space-x-8">
+                {[...suppliers, ...suppliers].map((s, idx) => (
+                  <a
+                    key={`${s.name}-${idx}`}
+                    href={`https://www.google.com/search?q=${encodeURIComponent(s.name)}+solar+inverter`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="inline-flex items-center justify-center bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:scale-105 flex-shrink-0 w-40 h-28"
+                    aria-label={`${s.name} products`}
+                  >
+                    <img
+                      src={s.logo}
+                      alt={`${s.name} logo`}
+                      className="h-12 w-auto object-contain"
+                      onError={(e) => { 
+                        const target = e.target as HTMLImageElement; 
+                        target.src = logoFallback(s.name); 
+                        target.onerror = null; 
+                      }}
+                    />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
 
-          {/* Products Grid (show preview of 4 products) */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProducts.slice(0, 3).map((product) => (
-              <motion.div
-                key={product.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-              >
-                <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
-                  <div className="bg-gradient-to-br from-muted to-muted/50 h-48 flex items-center justify-center relative">
-                    {product.imageUrl ? (
-                      <img 
-                        src={product.imageUrl} 
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).style.display = "none";
-                        }}
-                      />
-                    ) : null}
-                    <ShoppingCart className="w-12 h-12 text-muted-foreground/50 absolute" />
-                  </div>
-                  <div className="p-6 flex flex-col flex-grow">
-                    <h3 className="text-lg font-bold text-secondary mb-2">{product.name}</h3>
-                    <p className="text-muted-foreground text-sm mb-4 flex-grow">{product.description}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-2xl font-bold text-primary">${(product.price / 100).toFixed(2)}</span>
-                      <Button size="sm" variant="default">Add to Cart</Button>
-                    </div>
-                  </div>
-                </Card>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="flex justify-center mt-8">
-            <Link href="/products">
-              <Button variant="outline" className="px-8">
-                View More Products
-              </Button>
-            </Link>
+          {/* Call to Action */}
+          <div className="text-center mt-12">
+            <p className="text-muted-foreground mb-6">
+              Looking for specific brands or equipment? Contact us for product catalogs and pricing.
+            </p>
+            <Button 
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+              className="bg-primary hover:bg-primary/90"
+            >
+              Request Product Info
+              <ShoppingCart className="ml-2 w-4 h-4" />
+            </Button>
           </div>
         </div>
       </section>
@@ -770,3 +799,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

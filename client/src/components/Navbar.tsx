@@ -62,22 +62,31 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-6">
           {[
             { label: "Services", id: "services" },
             { label: "About", id: "about" },
+            { label: "Projects", id: "projects" },
+            { label: "Products", href: "/products" },
             { label: "Contact", id: "contact" },
           ].map((item) => (
-            <button
-              key={item.id}
-              onClick={() => scrollToSection(item.id)}
-              className={`text-sm font-medium transition-colors hover:text-primary ${
-                isScrolled ? "text-secondary" : "text-white/90"
-              }`}
-            >
-              {item.label}
-            </button>
+            item.href ? (
+              <Link key={item.href} href={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isScrolled ? "text-secondary" : "text-white/90"}`}>
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`text-sm font-medium transition-colors hover:text-primary ${
+                  isScrolled ? "text-secondary" : "text-white/90"
+                }`}
+              >
+                {item.label}
+              </button>
+            )
           ))}
+
           <Button 
             onClick={() => scrollToSection("contact")}
             className={isScrolled ? "" : "bg-white text-primary hover:bg-white/90 hover:text-primary"}
@@ -98,14 +107,29 @@ export function Navbar() {
       {/* Mobile Menu */}
       {isMobileOpen && (
         <div className="absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl p-4 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5">
-          {["Services", "About", "Contact"].map((label) => (
-            <button
-              key={label}
-              onClick={() => scrollToSection(label.toLowerCase())}
-              className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary"
-            >
-              {label}
-            </button>
+          {[
+            { label: "Services", id: "services" },
+            { label: "About", id: "about" },
+            { label: "Projects", id: "projects" },
+            { label: "Suppliers", id: "store" },
+            { label: "Testimonials", id: "testimonials" },
+            { label: "Location", id: "location" },
+            { label: "Products", href: "/products" },
+            { label: "Contact", id: "contact" },
+          ].map((item) => (
+            item.href ? (
+              <Link key={item.href} href={item.href} className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary">
+                {item.label}
+              </Link>
+            ) : (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary"
+              >
+                {item.label}
+              </button>
+            )
           ))}
           <Button onClick={() => scrollToSection("contact")} className="w-full">
             Get a Quote

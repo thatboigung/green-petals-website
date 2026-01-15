@@ -53,6 +53,8 @@ function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [activeImage, setActiveImage] = useState<string | null>(null);
+  const [lightboxImages, setLightboxImages] = useState<string[]>([]);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     if (!lightboxOpen) return;
@@ -98,13 +100,12 @@ function Home() {
 
   const suppliers = [
     { name: "Sako", logo: "/logos/sako.webp" },
-    { name: "Gainstar", logo: "/logos/gainstar.svg" },
+    { name: "Gainstar", logo: "/logos/gainstar.png" },
     { name: "Must", logo: "/logos/must.jpg" },
     { name: "Hz", logo: "/logos/hzsolar.svg" },
     { name: "Srne", logo: "/logos/srne.webp" },
     { name: "Deye", logo: "/logos/deye.jpg" },
     { name: "Sumry", logo: "/logos/sumry.webp" },
-    { name: "Polaris", logo: "/logos/polaris.svg" },
     { name: "Sunsynk", logo: "/logos/sunsynk.avif" },
     { name: "JA", logo: "/logos/ja-solar.png" },
     { name: "Jinko", logo: "/logos/jinko.png" },
@@ -340,7 +341,7 @@ function Home() {
      {/* Quick Stats */}
         <div className="grid grid-cols-3 gap-3 mb-12 md:mb-16">
           <div className="text-center p-4 bg-gray-50 rounded-lg">
-            <div className="text-xl font-bold text-primary">200+</div>
+            <div className="text-xl font-bold text-primary">100+</div>
             <div className="text-xs text-gray-600">Projects</div>
           </div>
           <div className="text-center p-4 bg-gray-50 rounded-lg">
@@ -373,7 +374,7 @@ function Home() {
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-primary text-white p-8 rounded-2xl shadow-xl hidden md:block max-w-xs">
-                <p className="font-bold text-3xl mb-1">10+</p>
+                <p className="font-bold text-3xl mb-1">5+</p>
                 <p className="text-sm opacity-90">Years of delivering excellence in engineering and maintenance.</p>
               </div>
             </motion.div>
@@ -388,8 +389,7 @@ function Home() {
         <div className="space-y-4">
           <h3 className="text-xl font-bold text-gray-900">Who We Are</h3>
           <p className="text-gray-600 leading-relaxed">
-            Green Petals Engineering is a trusted provider of engineering solutions in Zimbabwe. 
-            We specialize in solar energy, electrical systems, security, and automation for homes and businesses.
+          At Green Petals Engineering, we specialize in delivering integrated solutions in electrical engineering, computer engineering, automation, and energy systems. Our expertise spans design, implementation, and optimization of cutting-edge technologies tailored to meet the unique requirements of residential, commercial, and industrial clients. By leveraging our technical prowess in electrical installations, automation systems, and renewable energy integration, we drive operational efficiency, sustainability, and innovation for our clients.
           </p>
           <p className="text-gray-600 leading-relaxed">
             Our team focuses on quality workmanship, reliable service, and building lasting relationships with our clients.
@@ -434,8 +434,8 @@ function Home() {
     </div>
 
  {/* Core Values — horizontal marquee */}
-          <div className="bg-white rounded-2xl p-6 shadow-md">
-            <h3 className="text-lg font-semibold mb-4">Core Values</h3>
+          <div className="bg-white rounded-2xl p-6 shadow-md ">
+            <h3 className="text-lg font-semibold mb-4 text-center">Core Values</h3>
 
             <div className="overflow-hidden">
             <div ref={valuesRef} className="values-track flex items-center gap-4 overflow-x-auto no-scrollbar">
@@ -549,10 +549,10 @@ function Home() {
             <h3 className="text-xl font-bold text-gray-900">Automation</h3>
           </div>
           <p className="text-gray-600 mb-4">
-            Smart gate and garage automation with intercom integration for seamless access control.
+            Complete automation solutions from smart home to industrial process control.
           </p>
           <ul className="space-y-2">
-            {["Gate & Garage Automation", "Intercom Systems", "Access Control Integration"].map((item, index) => (
+            {["Smart Home Automation: Lighting, HVAC & Appliance Control", "Industrial Process Automation: PLC & SCADA Systems", "Building Management Systems (BMS)", "IoT Solutions: Device Integration", "Access Control Systems: Biometric & Card-Based", "Time & Attendance Systems", "Automated Irrigation Systems"].map((item, index) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -10 }}
@@ -589,10 +589,10 @@ function Home() {
             <h3 className="text-xl font-bold text-gray-900">Security Systems</h3>
           </div>
           <p className="text-gray-600 mb-4">
-            Complete security solutions to protect your property with advanced technology.
+            Comprehensive security solutions to protect your property with advanced technology.
           </p>
           <ul className="space-y-2">
-            {["Electric Fences", "CCTV Surveillance", "Access Control Systems", "Alarm Systems"].map((item, index) => (
+            {["Electric Fencing: Secure Perimeter Protection", "Access Control: Biometric & Smart Locks", "CCTV Surveillance: IP-Based Systems", "Alarm Systems: Intrusion Detection", "Smart Security: Mobile App Control", "Security Consulting & Risk Assessment", "Perimeter Security: Beam Sensors & Motion Detectors", "Video Analytics: AI-Powered Alerts"].map((item, index) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -10 }}
@@ -626,13 +626,13 @@ function Home() {
             >
               <Sun className="w-6 h-6 text-yellow-600" />
             </motion.div>
-            <h3 className="text-xl font-bold text-gray-900">Energy Solutions</h3>
+            <h3 className="text-xl font-bold text-gray-900">Renewable Energy Solutions</h3>
           </div>
           <p className="text-gray-600 mb-4">
-            Sustainable solar energy systems for homes and businesses with comprehensive maintenance.
+            Complete renewable energy solutions for sustainable power generation.
           </p>
           <ul className="space-y-2">
-            {["Solar System Installation", "System Maintenance", "Battery Backup Systems"].map((item, index) => (
+            {["Solar PV System Design & Installation", "Energy Storage & Battery Systems", "Green Energy Audits", "Microgrids: Localized Energy Systems", "Solar System Maintenance", "System Optimization"].map((item, index) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -10 }}
@@ -669,10 +669,10 @@ function Home() {
             <h3 className="text-xl font-bold text-gray-900">Electrical Services</h3>
           </div>
           <p className="text-gray-600 mb-4">
-            Professional electrical solutions for residential, commercial, and industrial applications.
+            Professional electrical solutions for all applications with safety and efficiency.
           </p>
           <ul className="space-y-2">
-            {["Domestic & Industrial Wiring", "Electrical Tubing", "Full System Installations"].map((item, index) => (
+            {["Electrical Installations: Wiring & Cabling", "Lighting Design & Installation", "Electrical Maintenance & Repairs", "Power Distribution & Switchgear", "Earthing & Lightning Protection", "Generator Installation & Maintenance", "Electrical Troubleshooting & Diagnostics", "Industrial System Upgrades"].map((item, index) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -10 }}
@@ -711,10 +711,10 @@ function Home() {
             <h3 className="text-xl font-bold text-gray-900">Industrial Services</h3>
           </div>
           <p className="text-gray-600 mb-4">
-            Specialized industrial engineering and maintenance services for commercial operations.
+            Specialized industrial engineering and automation services for efficient operations.
           </p>
           <ul className="space-y-2">
-            {["Machinery Maintenance", "Industrial Installations", "Equipment Setup"].map((item, index) => (
+            {["Machinery Installation & Commissioning", "Industrial Automation & Control Systems", "Predictive Maintenance Programs", "Industrial Electrical Repairs", "Panel Building & Installation", "Industrial IT & Cybersecurity", "Energy Efficiency Audits", "Safety Audits & Compliance Services"].map((item, index) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -10 }}
@@ -797,10 +797,10 @@ function Home() {
           <h3 className="text-xl font-bold text-gray-900">Consultancy</h3>
         </div>
         <p className="text-gray-600 mb-4">
-          Expert consulting services for optimized system design and implementation.
+          Expert consulting in electrical, electronic, and computer engineering solutions.
         </p>
         <ul className="space-y-2">
-          {["Renewable Energy Solutions", "Security Systems Design", "IT Infrastructure", "Energy Efficiency Audits", "Smart Home Automation"].map((item, index) => (
+          {["System Design & Integration", "Technical Feasibility Studies", "Energy Efficiency Audits", "Network Design & Implementation", "Cybersecurity Solutions", "Automation System Design", "Product Development & Design", "Testing & Certification", "Cloud Solutions for Industrial Data", "IoT Integration for Smart Solutions", "IT Infrastructure Planning"].map((item, index) => (
             <motion.li
               key={item}
               initial={{ opacity: 0, x: -10 }}
@@ -949,17 +949,17 @@ function Home() {
     <div className="flex justify-center">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full mx-auto place-items-center">
         {[
-          { src: "Prjct1.jpeg", caption: "Mandara — Electric fence installation", category: "Security" },
-          { src: "Prjct2.jpeg", caption: "Manresa Park — Project", category: "General" },
-          { src: "Prjct3.jpeg", caption: "Manresa Park — Project", category: "General" },
-          { src: "Prjct4.jpeg", caption: "Dema — Solar-powered floodlights", category: "Solar" },
-          { src: "Prjct5.jpeg", caption: "Sally Mugabe Heights — Solar installation", category: "Solar" },
-          { src: "Prjct6.jpeg", caption: "Sally Mugabe Heights — Project", category: "General" },
-          { src: "Prjct7.jpeg", caption: "Manresa Park — Repairs", category: "Maintenance" },
-          { src: "Prjct8.jpeg", caption: "Harare — Electrical repairs", category: "Electrical" },
+          { images: ["Prjct1.jpeg"], caption: "Electric fence installation", category: "Security" },
+          { images: ["Prjct2.jpeg", "Prjct3.jpeg"], caption: "Sliding gate, gabions and horizontal fencing", category: "General" },
+          { images: ["Prjct4.jpeg"], caption: "Solar-powered floodlights", category: "Solar" },
+          { images: ["Prjct5.jpeg", "Prjct6.jpeg"], caption: "Solar System Installation", category: "SolarSystems" },
+          { images: ["Prjct7.jpeg", "Prjct8.jpeg"], caption: "Repairs and Maintenance", category: "Maintenance" },
+          { images: ["Prjct9.jpeg", "Prjct10.jpeg"], caption: "Access control systems", category: "Security" },
+          { images: ["Prjct12.jpeg"], caption: "CCTV", category: "Security Systems" },
+          { images: ["Prjct11.jpeg"], caption: "AC or DC powered borehole system", category: "SolarSystems" },
         ].map((p, i) => (
           <motion.div
-            key={p.src}
+            key={p.images[0]}
             initial={{ opacity: 0, y: 30, scale: 0.95 }}
             whileInView={{ opacity: 1, y: 0, scale: 1 }}
             viewport={{ once: true }}
@@ -969,7 +969,12 @@ function Home() {
           >
             <div
               className="relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 cursor-pointer group w-full max-w-md"
-              onClick={() => { setActiveImage(`/projects/${p.src}`); setLightboxOpen(true); }}
+              onClick={() => { 
+                setLightboxImages(p.images.map(img => `/projects/${img}`));
+                setCurrentImageIndex(0);
+                setActiveImage(`/projects/${p.images[0]}`);
+                setLightboxOpen(true);
+              }}
             >
               {/* Category Badge */}
               <motion.div
@@ -987,7 +992,7 @@ function Home() {
               {/* Image */}
               <div className="overflow-hidden">
                 <motion.img
-                  src={`/projects/${p.src}`}
+                  src={`/projects/${p.images[0]}`}
                   alt={p.caption}
                   className="w-full h-44 md:h-56 object-cover transform group-hover:scale-110 transition-transform duration-500"
                   role="button"
@@ -1548,7 +1553,51 @@ function Home() {
           >
             <X className="w-5 h-5" />
           </button>
-          <img src={activeImage ?? ""} alt="Preview" className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg" onClick={(e) => e.stopPropagation()} />
+          
+          {/* Main Image */}
+          <div className="relative flex flex-col items-center max-w-4xl w-full">
+            <img 
+              src={activeImage ?? ""} 
+              alt="Preview" 
+              className="max-h-[80vh] max-w-[90vw] object-contain rounded-lg" 
+              onClick={(e) => e.stopPropagation()} 
+            />
+            
+            {/* Image Counter and Navigation */}
+            {lightboxImages.length > 1 && (
+              <div className="mt-4 flex items-center gap-4 w-full justify-center">
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const newIndex = currentImageIndex === 0 ? lightboxImages.length - 1 : currentImageIndex - 1;
+                    setCurrentImageIndex(newIndex);
+                    setActiveImage(lightboxImages[newIndex]);
+                  }}
+                  className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+                  aria-label="Previous image"
+                >
+                  <ArrowRight className="w-5 h-5 transform rotate-180" />
+                </button>
+                
+                <span className="text-white font-medium px-4">
+                  {currentImageIndex + 1} / {lightboxImages.length}
+                </span>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const newIndex = (currentImageIndex + 1) % lightboxImages.length;
+                    setCurrentImageIndex(newIndex);
+                    setActiveImage(lightboxImages[newIndex]);
+                  }}
+                  className="bg-white/20 hover:bg-white/30 text-white p-2 rounded-full transition-colors"
+                  aria-label="Next image"
+                >
+                  <ArrowRight className="w-5 h-5" />
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       )}
 

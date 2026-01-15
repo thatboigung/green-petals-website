@@ -17,7 +17,7 @@ export function Footer() {
   />
 </div>
               </div>
-              <span className="font-bold text-xl tracking-tight">Green Petals</span>
+              <span className="font-bold text-xl tracking-tight">Green Petals Engineering</span>
             </div>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
               Exceptional engineering solutions for homes and industries. Powering your future, securing your present.
@@ -31,7 +31,7 @@ export function Footer() {
               <li>Solar Systems</li>
               <li>Electrical Maintenance</li>
               <li>Security Installations</li>
-              <li>General Plumbing & Works</li>
+              <li>Welding</li>
             </ul>
           </div>
 
@@ -51,7 +51,7 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-white/70">
               <li className="flex items-start gap-3">
                 <MapPin className="w-4 h-4 mt-0.5 text-primary" />
-                <span>123 Industrial Ave,<br/>Engineering District</span>
+                <span>414 Acacia road, Manresa Park<br/>Harare, Zimbabwe</span>
               </li>
               <li className="space-y-1">
                 <div className="flex items-center gap-3">

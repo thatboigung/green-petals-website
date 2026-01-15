@@ -730,52 +730,7 @@ function Home() {
           </ul>
         </motion.div>
 
-        {/* Repairs & Maintenance */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5, delay: 0.5 }}
-          whileHover={{ y: -5, transition: { duration: 0.2 } }}
-          id="service-repairs"
-          className="service-card bg-white rounded-xl border border-gray-100 p-6 hover:shadow-lg transition-all duration-300"
-        >
-          <div className="flex items-center gap-3 mb-4">
-            <motion.div
-              whileHover={{ scale: 1.1, rotate: 5 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="bg-orange-50 p-3 rounded-lg"
-            >
-              <Wrench className="w-6 h-6 text-orange-600" />
-            </motion.div>
-            <h3 className="text-xl font-bold text-gray-900">Repairs & Maintenance</h3>
-          </div>
-          <p className="text-gray-600 mb-4">
-            Comprehensive repair and maintenance services to keep your systems running optimally.
-          </p>
-          <ul className="space-y-2">
-            {["Control Panel Troubleshooting", "Solar System Optimization", "PV Panel Cleaning", "Inverter Servicing"].map((item, index) => (
-              <motion.li
-                key={item}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: 0.1 * index }}
-                className="flex items-start gap-2"
-              >
-                <CheckCircle2 className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
-                <span className="text-sm text-gray-600">{item}</span>
-              </motion.li>
-            ))}
-          </ul>
-        </motion.div>
-
-      </div>
-    </div>
-
-    {/* Consultancy Card - Centered on its own row */}
-    <div className="flex justify-center mt-6">
-      <motion.div
+           <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
@@ -815,6 +770,13 @@ function Home() {
           ))}
         </ul>
       </motion.div>
+
+      </div>
+    </div>
+
+    {/* Consultancy Card - Centered on its own row */}
+    <div className="flex justify-center mt-6">
+   
     </div>
 
     {/* Service Highlights Row with Animation - Reduced Padding */}
@@ -949,14 +911,14 @@ function Home() {
     <div className="flex justify-center">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full mx-auto place-items-center">
         {[
-          { images: ["Prjct1.jpeg"], caption: "Electric fence installation", category: "Security" },
-          { images: ["Prjct2.jpeg", "Prjct3.jpeg"], caption: "Sliding gate, gabions and horizontal fencing", category: "General" },
-          { images: ["Prjct4.jpeg"], caption: "Solar-powered floodlights", category: "Solar" },
-          { images: ["Prjct5.jpeg", "Prjct6.jpeg"], caption: "Solar System Installation", category: "SolarSystems" },
-          { images: ["Prjct7.jpeg", "Prjct8.jpeg"], caption: "Repairs and Maintenance", category: "Maintenance" },
-          { images: ["Prjct9.jpeg", "Prjct10.jpeg"], caption: "Access control systems", category: "Security" },
+          { images: ["Prjct1.jpeg"], caption: "Mandara - Electric fence installation", category: "Security" },
+          { images: ["Prjct2.jpeg", "Prjct3.jpeg"], caption: "Manresa Park - Sliding gate, gabions and horizontal fencing", category: "Welding" },
+          { images: ["Prjct4.jpeg"], caption: "Dema - Solar-powered floodlights", category: "Solar" },
+          { images: ["Prjct5.jpeg", "Prjct6.jpeg"], caption: "Sally Mugabe Height - Solar System Installation", category: "SolarSystems" },
+          { images: ["Prjct7.jpeg", "Prjct8.jpeg"], caption: "Manresa Park - Repairs and Maintenance", category: "Maintenance" },
+          { images: ["Prjct9.jpeg", "Prjct10.jpeg"], caption: " Access control systems", category: "Security" },
           { images: ["Prjct12.jpeg"], caption: "CCTV", category: "Security Systems" },
-          { images: ["Prjct11.jpeg"], caption: "AC or DC powered borehole system", category: "SolarSystems" },
+          { images: ["Prjct11.jpeg"], caption: "Zimunya - AC or DC powered borehole system", category: "SolarSystems" },
         ].map((p, i) => (
           <motion.div
             key={p.images[0]}

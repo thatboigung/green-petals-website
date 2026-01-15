@@ -56,7 +56,7 @@ export function Navbar() {
               Green Petals
             </span>
             <span className={`text-xs font-medium tracking-widest uppercase ${isScrolled ? 'text-primary' : 'text-primary md:text-white/80'}`}>
-              Engineering
+              Engineering (GPE)
             </span>
           </div>
         </Link>

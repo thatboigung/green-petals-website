@@ -75,13 +75,24 @@ function Home() {
 
   // Map testimonials to provided names and link to project images
   type TestimonialWithProject = Testimonial & { project?: string };
-  const testimonialNames = ["Mr Banda", "Mr Mapfumo", "Mama Mai Chichi", "Mai Beauty", "Mr Zimunya"];
-  const testimonialProjects = ["Prjct2.jpeg", "Prjct5.jpeg", "Prjct1.jpeg", "Prjct4.jpeg", "Prjct8.jpeg"];
+  const testimonialNames = ["Mr Banda", "Dr L Shayamunda", "Mama Mai Ccuh", "Mr Mafini", "Dalph", "Dr L Shayamunda", "Mr Mazhindu", "Mr Mazhindu"];
+  const testimonialProjects = ["Prjct1.jpeg", "Prjct2.jpeg", "Prjct4.jpeg", "Prjct5.jpeg", "Prjct7.jpeg", "Prjct9.jpeg", "Prjct12.jpeg", "Prjct11.jpeg"];
+  const testimonialContents = [
+    "Top-notch service! The team was professional and the electric fence is solid. Highly recommend! 👍",
+    "Quality work, on time and budget! My sliding gate looks sleek, gabions are sturdy. Thanks Green Petals Engineering! 😊",
+    "These solar lights are a game-changer! Bright and reliable, even on cloudy days. Thanx so much! 🌞",
+    "Expertise and professionalism! Our solar system is efficient, reduced our bills. Well done Green Petals Engineering! 💡",
+    "Quick response, fixed my gate motor in no time. Handy guys, will call again! 👍",
+    "Convenient and secure! The audio intercom is top-notch, thanks for the install. 😊",
+    "Peace of mind with these cameras. Clear footage, great service! 👍",
+    "Water is life! Thanks Green Petals Engineering, our borehole is pumping strong with solar power. 💧"
+  ];
 
   const enhancedTestimonials = (testimonials && testimonials.length
-    ? (testimonials as TestimonialWithProject[]).slice(0, 5).map((t, i) => ({
+    ? (testimonials as TestimonialWithProject[]).slice(0, 8).map((t, i) => ({
         ...t,
         author: testimonialNames[i] ?? t.author,
+        content: testimonialContents[i] ?? t.content,
         project: testimonialProjects[i],
       }))
     : testimonialNames.map((name, i) => ({
@@ -89,7 +100,7 @@ function Home() {
         createdAt: null,
         author: name,
         position: null,
-        content: "Excellent workmanship and timely delivery.",
+        content: testimonialContents[i] ?? "Excellent workmanship and timely delivery.",
         rating: 5,
         project: testimonialProjects[i],
       }))) as TestimonialWithProject[];
@@ -100,7 +111,6 @@ function Home() {
 
   const suppliers = [
     { name: "Sako", logo: "/logos/sako.webp" },
-    { name: "Gainstar", logo: "/logos/gainstar.png" },
     { name: "Must", logo: "/logos/must.jpg" },
     { name: "Hz", logo: "/logos/hzsolar.svg" },
     { name: "Srne", logo: "/logos/srne.webp" },
@@ -111,6 +121,9 @@ function Home() {
     { name: "Jinko", logo: "/logos/jinko.png" },
     { name: "Canadian", logo: "/logos/canadian-solar.png" },
     { name: "Sunpro", logo: "/logos/sunpro.jpg" },
+    { name: "Victron", logo: "/logos/victron.png" },
+    { name: "Solis", logo: "/logos/solis.webp" },
+    { name: "Goodwe", logo: "/logos/goodwe.svg" },
   ];
 
   // Provide a guaranteed fallback as an inline SVG data URL so logos always render even if external sources fail
@@ -911,14 +924,14 @@ function Home() {
     <div className="flex justify-center">
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl w-full mx-auto place-items-center">
         {[
-          { images: ["Prjct1.jpeg"], caption: "Mandara - Electric fence installation", category: "Security" },
-          { images: ["Prjct2.jpeg", "Prjct3.jpeg"], caption: "Manresa Park - Sliding gate, gabions and horizontal fencing", category: "Welding" },
-          { images: ["Prjct4.jpeg"], caption: "Dema - Solar-powered floodlights", category: "Solar" },
-          { images: ["Prjct5.jpeg", "Prjct6.jpeg"], caption: "Sally Mugabe Height - Solar System Installation", category: "SolarSystems" },
-          { images: ["Prjct7.jpeg", "Prjct8.jpeg"], caption: "Manresa Park - Repairs and Maintenance", category: "Maintenance" },
-          { images: ["Prjct9.jpeg", "Prjct10.jpeg"], caption: " Access control systems", category: "Security" },
-          { images: ["Prjct12.jpeg"], caption: "CCTV", category: "Security Systems" },
-          { images: ["Prjct11.jpeg"], caption: "Zimunya - AC or DC powered borehole system", category: "SolarSystems" },
+          { images: ["Prjct1.jpeg"], caption: "Mandara - Electric Fence Installation", category: "Security Systems" },
+          { images: ["Prjct2.jpeg", "Prjct3.jpeg"], caption: "Manresa Park - Sliding Gates, Gabions & Horizontal Fencing Fabrication", category: "Welding" },
+          { images: ["Prjct4.jpeg"], caption: "Dema - Solar Powered Floodlights", category: "Solar Lights" },
+          { images: ["Prjct5.jpeg", "Prjct6.jpeg"], caption: "Sally Mugabe Heights - Solar System Design and Installation", category: "Solar Powered Systems" },
+          { images: ["Prjct7.jpeg", "Prjct8.jpeg"], caption: "Manresa Park - Gate Motor Repair", category: "Repairs and Maintenance" },
+          { images: ["Prjct9.jpeg", "Prjct10.jpeg"], caption: "Manresa Park - Audio Intercom Installation", category: "Access Control System" },
+          { images: ["Prjct12.jpeg"], caption: "Manresa Park - IP Based Camera Installation", category: "CCTV Surveillance System" },
+          { images: ["Prjct11.jpeg"], caption: "Gutu - Solar Powered Borehole Installation", category: "Reliable Water Systems" },
         ].map((p, i) => (
           <motion.div
             key={p.images[0]}
@@ -1295,8 +1308,13 @@ function Home() {
                     <Phone className="w-6 h-6 text-primary" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-secondary mb-1">Phone</h4>
-                    <p className="text-muted-foreground">+263784932948</p>
+                    <h4 className="font-bold text-secondary mb-3">Phone</h4>
+                    <div className="space-y-2">
+                      <div><a href="tel:+263784932948" className="text-muted-foreground hover:underline">+263 78 493 2948</a></div>
+                      <div><a href="tel:+263242437342" className="text-muted-foreground hover:underline">+263 242 437342</a></div>
+                      <div><a href="tel:+263787535759" className="text-muted-foreground hover:underline">+263 787 535759</a></div>
+                      <div><a href="tel:+263719335497" className="text-muted-foreground hover:underline">+263 719 335497</a></div>
+                    </div>
                   </div>
                 </div>
 
@@ -1359,15 +1377,15 @@ function Home() {
                   </p>
 
                   <div className="space-y-8">
-                    <div className="flex items-start gap-4">
-                      <div className="bg-white/10 p-3 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-white/10 p-3 rounded-lg flex-shrink-0">
                         <Phone className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-lg">Phone</h4>
-                        <p className="text-muted-foreground"><a href="tel:+263784932948" aria-label="Call +263 78 493 2948" className="hover:underline">+263 78 493 2948</a></p>
-                        <p className="text-muted-foreground mt-2 font-medium">Other numbers</p>
-                        <div className="mt-2 space-y-1 text-muted-foreground">
+                        <h4 className="font-semibold text-lg text-white">Phone</h4>
+                        <p className="text-white/70"><a href="tel:+263784932948" aria-label="Call +263 78 493 2948" className="hover:underline">+263 78 493 2948</a></p>
+                        <p className="text-white/70 mt-2 font-medium">Other numbers</p>
+                        <div className="mt-2 space-y-1 text-white/70">
                           <div><a href="tel:+263242437342" aria-label="Call +263 242 437342" className="hover:underline">+263 242 437342</a></div>
                           <div><a href="tel:+263787535759" aria-label="Call +263 787 535759" className="hover:underline">+263 787 535759</a></div>
                           <div><a href="tel:+263719335497" aria-label="Call +263 719 335497" className="hover:underline">+263 719 335497</a></div>
@@ -1375,23 +1393,23 @@ function Home() {
                       </div>
                     </div>
                     
-                    <div className="flex items-start gap-4">
-                      <div className="bg-white/10 p-3 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-white/10 p-3 rounded-lg flex-shrink-0">
                         <Mail className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-lg">Email</h4>
-                        <p className="text-white/60">jshayamunda@yahoo.com</p>
+                        <h4 className="font-semibold text-lg text-white">Email</h4>
+                        <p className="text-white/70">jshayamunda@yahoo.com</p>
                       </div>
                     </div>
 
-                    <div className="flex items-start gap-4">
-                      <div className="bg-white/10 p-3 rounded-lg">
+                    <div className="flex items-center gap-4">
+                      <div className="bg-white/10 p-3 rounded-lg flex-shrink-0">
                         <MapPin className="w-6 h-6 text-primary" />
                       </div>
                       <div>
-                        <h4 className="font-semibold text-lg">Location</h4>
-                          <p className="text-muted-foreground">414 Acacia road, Manresa Park,Harare, Zimbabwe</p>
+                        <h4 className="font-semibold text-lg text-white">Location</h4>
+                          <p className="text-white/70">414 Acacia road, Manresa Park,Harare, Zimbabwe</p>
                       </div>
                     </div>
                   </div>

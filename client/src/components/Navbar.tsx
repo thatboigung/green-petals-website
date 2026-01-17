@@ -67,7 +67,6 @@ export function Navbar() {
             { label: "Services", id: "services" },
             { label: "About", id: "about" },
             { label: "Projects", id: "projects" },
-            { label: "Products", href: "/products" },
             { label: "Contact", id: "contact" },
           ].map((item) => (
             item.href ? (
@@ -114,7 +113,6 @@ export function Navbar() {
             { label: "Suppliers", id: "store" },
             { label: "Testimonials", id: "testimonials" },
             { label: "Location", id: "location" },
-            { label: "Products", href: "/products" },
             { label: "Contact", id: "contact" },
           ].map((item) => (
             item.href ? (

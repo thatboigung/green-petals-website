@@ -28,20 +28,21 @@ export function Footer() {
           <div>
             <h4 className="font-bold mb-4 text-white">Services</h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>Solar Systems</li>
-              <li>Electrical Maintenance</li>
-              <li>Security Installations</li>
-              <li>Welding</li>
+              <li><a href="#services" className="hover:text-white transition-colors">Solar System Insallations</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Repaire & Maintenance</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Electrical Installations</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Security Installations</a></li>
+              <li><a href="#services" className="hover:text-white transition-colors">Welding</a></li>
             </ul>
           </div>
 
           <div>
             <h4 className="font-bold mb-4 text-white">Company</h4>
             <ul className="space-y-2 text-sm text-white/70">
-              <li>About Us</li>
-              <li>Projects</li>
-              <li>Careers</li>
-              <li>Contact</li>
+              <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
+              <li><a href="#projects" className="hover:text-white transition-colors">Projects</a></li>
+              <li><a href="#careers" className="hover:text-white transition-colors">Careers</a></li>
+              <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
           </div>
 

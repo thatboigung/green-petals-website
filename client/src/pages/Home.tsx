@@ -907,7 +907,6 @@ function Home() {
         transition={{ duration: 0.6, delay: 0.1 }}
         className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4"
       >
-        Recent Works Across Harare
       </motion.h2>
       <motion.p
         initial={{ opacity: 0, y: 10 }}
@@ -916,7 +915,7 @@ function Home() {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="text-gray-600"
       >
-        A selection of our installations and repairs — solar installations, gate motor systems, electrical fence installation, solar flood lights, solar pumps, telecoms and general repairs.
+        Showcasing our expertise in delivering robust, reliable, and innovative solutions for Zimbabwe's infrastructure needs, from harnessing renewable energy to securing properties and maintaining critical systems.
       </motion.p>
     </motion.div>
 

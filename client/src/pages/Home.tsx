@@ -1293,8 +1293,8 @@ function Home() {
 
               <div className="space-y-6">
                 <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
-                    <MapPin className="w-6 h-6 text-primary" />
+                  <div className="bg-primary/10 p-1 rounded-lg flex-shrink-0">
+                    <MapPin className="w-3 h-3 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Address</h4>
@@ -1303,8 +1303,8 @@ function Home() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
-                    <Phone className="w-6 h-6 text-primary" />
+                  <div className="bg-primary/10 p-1 rounded-lg flex-shrink-0">
+                    <Phone className="w-3 h-3 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-3">Phone</h4>
@@ -1318,18 +1318,18 @@ function Home() {
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
-                    <Mail className="w-6 h-6 text-primary" />
+                  <div className="bg-primary/10 p-1 rounded-lg flex-shrink-0">
+                    <Mail className="w-3 h-3 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Email</h4>
-                    <p className="text-muted-foreground">justineshayamunda@greenpetalsengineering.co.zw</p>
+                    <p className="text-muted-foreground break-words" style={{ wordBreak: 'break-word' }}>justineshayamunda@greenpetalsengineering.co.zw</p>
                   </div>
                 </div>
 
                 <div className="flex items-start gap-4">
-                  <div className="bg-primary/10 p-3 rounded-lg flex-shrink-0">
-                    <Instagram className="w-6 h-6 text-primary" />
+                  <div className="bg-primary/10 p-1 rounded-lg flex-shrink-0">
+                    <Instagram className="w-3 h-3 text-primary" />
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Instagram</h4>
@@ -1377,8 +1377,8 @@ function Home() {
 
                   <div className="space-y-8">
                     <div className="flex items-center gap-4">
-                      <div className="bg-white/10 p-3 rounded-lg flex-shrink-0">
-                        <Phone className="w-6 h-6 text-primary" />
+                      <div className="bg-white/10 p-1 rounded-lg flex-shrink-0">
+                        <Phone className="w-3 h-3 text-primary" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg text-white">Phone</h4>
@@ -1393,18 +1393,18 @@ function Home() {
                     </div>
                     
                     <div className="flex items-center gap-4">
-                      <div className="bg-white/10 p-3 rounded-lg flex-shrink-0">
-                        <Mail className="w-6 h-6 text-primary" />
+                      <div className="bg-white/10 p-1 rounded-lg flex-shrink-0">
+                        <Mail className="w-3 h-3 text-primary" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg text-white">Email</h4>
-                        <p className="text-white/70">justineshayamunda@greenpetalsengineering.co.zw</p>
+                        <p className="text-white/70 break-words" style={{ wordBreak: 'break-word' }}>justineshayamunda@greenpetalsengineering.co.zw</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-4">
-                      <div className="bg-white/10 p-3 rounded-lg flex-shrink-0">
-                        <MapPin className="w-6 h-6 text-primary" />
+                      <div className="bg-white/10 p-1 rounded-lg flex-shrink-0">
+                        <MapPin className="w-3 h-3 text-primary" />
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg text-white">Location</h4>

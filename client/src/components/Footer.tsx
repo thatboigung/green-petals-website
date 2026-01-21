@@ -68,7 +68,12 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-primary" />
-                <span>justineshayamunda@greenpetalsengineering.co.zw</span>
+                <span
+                  className="break-words max-w-full overflow-hidden text-ellipsis whitespace-normal"
+                  style={{ wordBreak: 'break-word', maxWidth: '100%' }}
+                >
+                  justineshayamunda@greenpetalsengineering.co.zw
+                </span>
               </li>
             </ul>
           </div>

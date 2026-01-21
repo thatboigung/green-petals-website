@@ -685,7 +685,7 @@ function Home() {
             Professional electrical solutions for all applications with safety and efficiency.
           </p>
           <ul className="space-y-2">
-            {["Electrical Installations: Wiring & Cabling", "Lighting Design & Installation", "Electrical Maintenance & Repairs", "Power Distribution & Switchgear", "Earthing & Lightning Protection", "Generator Installation & Maintenance", "Electrical Troubleshooting & Diagnostics", "Industrial System Upgrades"].map((item, index) => (
+            {["Electrical Installations: Tubing and Wiring", "Lighting Design & Installation", "Electrical Maintenance & Repairs", "Power Distribution & Switchgear", "Earthing & Lightning Protection", "Generator Installation & Maintenance", "Electrical Troubleshooting & Diagnostics", "Industrial System Upgrades"].map((item, index) => (
               <motion.li
                 key={item}
                 initial={{ opacity: 0, x: -10 }}
@@ -1323,7 +1323,7 @@ function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Email</h4>
-                    <p className="text-muted-foreground">jshayamunda@yahoo.com</p>
+                    <p className="text-muted-foreground">justineshayamunda@greenpetalsengineering.co.zw</p>
                   </div>
                 </div>
 
@@ -1398,7 +1398,7 @@ function Home() {
                       </div>
                       <div>
                         <h4 className="font-semibold text-lg text-white">Email</h4>
-                        <p className="text-white/70">jshayamunda@yahoo.com</p>
+                        <p className="text-white/70">justineshayamunda@greenpetalsengineering.co.zw</p>
                       </div>
                     </div>
 

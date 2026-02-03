@@ -35,6 +35,8 @@ export function Navbar() {
           ? "bg-white/90 backdrop-blur-md shadow-md py-3 border-b border-border/50"
           : "bg-transparent py-5"
       }`}
+      role="navigation"
+      aria-label="Main Navigation"
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
@@ -42,12 +44,13 @@ export function Navbar() {
           href="/" 
           className="flex items-center gap-2 group cursor-pointer"
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          aria-label="Green Petals Engineering Home"
         >
          <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
   <img
     src="./favi-icon.png"
-    alt=""
-    className="w-8 h-8 rounded-full" // adjust size and radius
+    alt="Green Petals Engineering logo"
+    className="w-8 h-8 rounded-full"
   />
 </div>
 
@@ -62,7 +65,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop Links */}
-        <div className="hidden md:flex items-center gap-6">
+        <ul className="hidden md:flex items-center gap-6" role="menubar" aria-label="Main menu">
           {[
             { label: "Services", id: "services" },
             { label: "About", id: "about" },
@@ -70,34 +73,43 @@ export function Navbar() {
             { label: "Contact", id: "contact" },
           ].map((item) => (
             item.href ? (
-              <Link key={item.href} href={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isScrolled ? "text-secondary" : "text-white/90"}`}>
-                {item.label}
-              </Link>
+              <li key={item.href} role="none">
+                <Link href={item.href} className={`text-sm font-medium transition-colors hover:text-primary ${isScrolled ? "text-secondary" : "text-white/90"}`} role="menuitem">
+                  {item.label}
+                </Link>
+              </li>
             ) : (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  isScrolled ? "text-secondary" : "text-white/90"
-                }`}
-              >
-                {item.label}
-              </button>
+              <li key={item.id} role="none">
+                <button
+                  onClick={() => scrollToSection(item.id)}
+                  className={`text-sm font-medium transition-colors hover:text-primary ${
+                    isScrolled ? "text-secondary" : "text-white/90"
+                  }`}
+                  role="menuitem"
+                >
+                  {item.label}
+                </button>
+              </li>
             )
           ))}
-
-          <Button 
-            onClick={() => scrollToSection("contact")}
-            className={isScrolled ? "" : "bg-white text-primary hover:bg-white/90 hover:text-primary"}
-          >
-            Get a Quote
-          </Button>
-        </div>
+          <li role="none">
+            <Button 
+              onClick={() => scrollToSection("contact")}
+              className={isScrolled ? "" : "bg-white text-primary hover:bg-white/90 hover:text-primary"}
+              role="menuitem"
+            >
+              Get a Quote
+            </Button>
+          </li>
+        </ul>
 
         {/* Mobile Toggle */}
         <button
           className="md:hidden p-2 text-secondary"
           onClick={() => setIsMobileOpen(!isMobileOpen)}
+          aria-label={isMobileOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMobileOpen}
+          aria-controls="mobile-menu"
         >
           {isMobileOpen ? <X /> : <Menu className={isScrolled ? "" : "text-white"} />}
         </button>
@@ -105,7 +117,7 @@ export function Navbar() {
 
       {/* Mobile Menu */}
       {isMobileOpen && (
-        <div className="absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl p-4 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5">
+        <div id="mobile-menu" className="absolute top-full left-0 right-0 bg-white border-b border-border shadow-xl p-4 md:hidden flex flex-col gap-4 animate-in slide-in-from-top-5" role="menu" aria-label="Mobile menu">
           {[
             { label: "Services", id: "services" },
             { label: "About", id: "about" },
@@ -116,7 +128,7 @@ export function Navbar() {
             { label: "Contact", id: "contact" },
           ].map((item) => (
             item.href ? (
-              <Link key={item.href} href={item.href} className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary">
+              <Link key={item.href} href={item.href} className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary" role="menuitem">
                 {item.label}
               </Link>
             ) : (
@@ -124,12 +136,13 @@ export function Navbar() {
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className="text-left py-2 px-4 rounded-lg hover:bg-muted font-medium text-secondary"
+                role="menuitem"
               >
                 {item.label}
               </button>
             )
           ))}
-          <Button onClick={() => scrollToSection("contact")} className="w-full">
+          <Button onClick={() => scrollToSection("contact")} className="w-full" role="menuitem">
             Get a Quote
           </Button>
         </div>

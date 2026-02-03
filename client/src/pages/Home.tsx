@@ -267,9 +267,12 @@ function Home() {
         <div className="absolute inset-0 z-0">
           {/* Unsplash: Solar panels / Engineering */}
           <img 
-            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop"
+            srcSet="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=400&auto=format&fit=crop 400w, https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=1200&auto=format&fit=crop 1200w"
+            sizes="(max-width: 768px) 100vw, 50vw"
             alt="Solar Panels and Engineering"
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-secondary/80 mix-blend-multiply" />
           <div className="absolute inset-0 bg-gradient-to-t from-secondary via-transparent to-transparent opacity-90" />
@@ -292,7 +295,7 @@ function Home() {
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight font-display">
-                Powering Your Future,<br />
+                <span>Powering Your Future,</span><br />
                 <span className="text-primary-foreground">Securing Your Present</span>
               </h1>
               
@@ -344,7 +347,7 @@ function Home() {
         About Us
       </span>
       <h2 className="text-2xl md:text-3xl font-bold text-gray-900 mb-4">
-        Engineering Excellence for <span className="text-primary">Every Project</span>
+        <span>Engineering Excellence for </span><span className="text-primary">Every Project</span>
       </h2>
       <p className="text-gray-600 max-w-2xl mx-auto">
         We combine technical expertise with practical solutions to deliver reliable engineering services across Zimbabwe.
@@ -381,9 +384,12 @@ function Home() {
               {/* Unsplash: Engineer working */}
               <div className="rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=2070&auto=format&fit=crop" 
-                  alt="Engineer working on solar panels"
+                  src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop" 
+                  srcSet="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=400&auto=format&fit=crop 400w, https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1200&auto=format&fit=crop 1200w"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  alt="Engineer working on solar panels installing solar panels in Zimbabwe. Green Petals Engineering team."
                   className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                  loading="lazy"
                 />
               </div>
               <div className="absolute -bottom-6 -right-6 bg-primary text-white p-8 rounded-2xl shadow-xl hidden md:block max-w-xs">
@@ -1323,7 +1329,7 @@ function Home() {
                   </div>
                   <div>
                     <h4 className="font-bold text-secondary mb-1">Email</h4>
-                    <p className="text-muted-foreground break-words" style={{ wordBreak: 'break-word' }}>justineshayamunda@greenpetalsengineering.co.zw</p>
+                    <p className="text-muted-foreground break-words" style={{ wordBreak: 'break-word' }}>jshayamunda@greenpetalsengineering.co.zw</p>
                   </div>
                 </div>
 
@@ -1540,6 +1546,7 @@ function Home() {
               alt="Preview" 
               className="max-h-[80vh] max-w-[90vw] object-contain rounded-lg" 
               onClick={(e) => e.stopPropagation()} 
+              loading="lazy"
             />
             
             {/* Image Counter and Navigation */}

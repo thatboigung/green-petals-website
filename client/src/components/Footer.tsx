@@ -2,30 +2,30 @@ import { Leaf, Mail, MapPin, Phone } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="bg-secondary text-white pt-16 pb-8">
+    <footer className="bg-secondary text-white pt-16 pb-8" role="contentinfo">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
-          <div className="col-span-1 md:col-span-1">
+          <section className="col-span-1 md:col-span-1" aria-label="About Green Petals Engineering">
             <div className="flex items-center gap-2 mb-4">
               <div className="bg-primary rounded-md">
-                      <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
-  <img
-    src="./favi-icon.png"
-    alt=""
-    className="w-8 h-8 rounded-full" // adjust size and radius
-  />
-</div>
+                <div className="text-white rounded-lg group-hover:bg-primary/90 transition-colors">
+                  <img
+                    src="./favi-icon.png"
+                    alt="Green Petals Engineering logo"
+                    className="w-8 h-8 rounded-full"
+                  />
+                </div>
               </div>
               <span className="font-bold text-xl tracking-tight">Green Petals Engineering</span>
             </div>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
               Exceptional engineering solutions for homes and industries. Powering your future, securing your present.
             </p>
-          </div>
+          </section>
 
           {/* Quick Links */}
-          <div>
+          <nav aria-label="Services">
             <h4 className="font-bold mb-4 text-white">Services</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li><a href="#services" className="hover:text-white transition-colors">Solar System Installations</a></li>
@@ -34,9 +34,9 @@ export function Footer() {
               <li><a href="#services" className="hover:text-white transition-colors">Security Installations</a></li>
               <li><a href="#services" className="hover:text-white transition-colors">Welding</a></li>
             </ul>
-          </div>
+          </nav>
 
-          <div>
+          <nav aria-label="Company">
             <h4 className="font-bold mb-4 text-white">Company</h4>
             <ul className="space-y-2 text-sm text-white/70">
               <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
@@ -44,10 +44,10 @@ export function Footer() {
               <li><a href="#careers" className="hover:text-white transition-colors">Careers</a></li>
               <li><a href="#contact" className="hover:text-white transition-colors">Contact</a></li>
             </ul>
-          </div>
+          </nav>
 
           {/* Contact */}
-          <div>
+          <section aria-label="Contact Information">
             <h4 className="font-bold mb-4 text-white">Contact Us</h4>
             <ul className="space-y-3 text-sm text-white/70">
               <li className="flex items-start gap-3">
@@ -72,18 +72,18 @@ export function Footer() {
                   className="break-words max-w-full overflow-hidden text-ellipsis whitespace-normal"
                   style={{ wordBreak: 'break-word', maxWidth: '100%' }}
                 >
-                  justineshayamunda@greenpetalsengineering.co.zw
+                  jshayamunda@greenpetalsengineering.co.zw
                 </span>
               </li>
             </ul>
-          </div>
+          </section>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-white/50">
           <p>&copy; {new Date().getFullYear()} Green Petals Engineering. All rights reserved.</p>
           <div className="flex gap-6">
-            <span>Privacy Policy</span>
-            <span>Terms of Service</span>
+            <a href="/privacy-policy" className="hover:underline">Privacy Policy</a>
+            <a href="/terms-of-service" className="hover:underline">Terms of Service</a>
           </div>
         </div>
       </div>

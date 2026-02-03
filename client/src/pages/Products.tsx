@@ -29,8 +29,9 @@ export default function ProductsPage() {
         <div className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2072&auto=format&fit=crop"
-            alt="Products Hero"
+            alt="Solar panels, batteries, and inverters for sale in Zimbabwe. Green Petals Engineering product showcase."
             className="w-full h-full object-cover"
+            loading="lazy"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-secondary/80 to-transparent" />
         </div>
@@ -72,7 +73,7 @@ export default function ProductsPage() {
                 <Card className="overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
                   <div className="bg-gradient-to-br from-muted to-muted/50 h-48 flex items-center justify-center relative">
                     {product.imageUrl ? (
-                      <img src={product.imageUrl} alt={product.name} className="w-full h-full object-cover" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
+                      <img src={product.imageUrl} alt={product.name + ' - ' + product.description} className="w-full h-full object-cover" loading="lazy" onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }} />
                     ) : null}
                     <ShoppingCart className="w-12 h-12 text-muted-foreground/50 absolute" />
                   </div>
